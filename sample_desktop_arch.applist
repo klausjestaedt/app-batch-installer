@@ -1,0 +1,48 @@
+type=arch
+#
+# This is a list of my desktop apps for a CachyOS system
+#
+afpfs-ng;Arch Support für AFP
+brave-bin;Brave Browser
+calibre;E-Book-Management und -Konvertierung
+chromium-bsu;Arcade-Top-Down-Shooter
+clamav;Antiviren-Scanner für die Kommandozeile
+clamtk;GUI für ClamAV
+darktable;RAW-Fotoentwicklungs- und Bearbeitungsprogramm
+dialect;A translation app for GNOME based on Google Translate
+dnsmasq;Virtuelle Maschinen
+filezilla;Beliebter FTP-Client mit GUI
+freerdp;RDP Library
+FUSE;Virtual File System
+ghostwriter;Ablenkungsfreier Markdown-Editor
+gimp;Bildbearbeitungsprogramm ähnlich Photoshop
+gvfs-smb;Arch Support für GTK SMB
+inkscape;Vektorgrafikprogramm
+krita;Thumbnailer for Krita and MyPaint images
+libreoffice-fresh-de;LibreOffice
+libreoffice-fresh;LibreOffice
+libvlc-luajit;Obs Plugins
+markdownpart;Markdown KPart !! Damit Markdown Preview in Kate funktioniert
+networkmanager-openvpn;
+networkmanager-vpnc;
+okular;PDF Betrachter
+openbsd-netcat;Virtuelle Maschinen
+openvpn;
+phonon-qt6-vlc;Videos in Gwenview wiedergeben
+plasma-nm;
+poedit;
+remmina;Remote-Desktop-Client für RDP
+rpi-imager;Raspberry Pi imager
+rssguard;RSS Feedreader
+samba;Arch Support für GTK SMB
+scribus;DTP
+smbclient;Arch Support für Dolphin SMB
+solaar;Maus-Tool für MX Master Maus
+speech-dispatcher;Sprache auf dem Terminal
+telegram-desktop;Desktop-Version des Telegram Messengers
+thunderbird;E-Mail-Client von Mozilla
+torbrowser-launcher;Tor-Browser mit automatischem Update
+transmission-gtk;Leichter BitTorrent-Client
+vpnc;
+waydroid;
+wireshark-qt;Netzwerk-Analyse-Tool
