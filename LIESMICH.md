@@ -21,18 +21,15 @@ Ohne Argumente gibt das Script eine kleine Hilfe aus und listet alle *.applist D
 Wenn Argument 1 = check dann wird Argument 2 geprüft.
 Argument 2 kann auch mehrere Dateien auflisten, muss aber in Anführungszeichen gesetzt werden, ' oder "
 Argument 2 kann auch GLOB Angaben enthalten, auch hier sind Anführungszeichen zu setzen, ' oder "
-Argument 2 kann auch "all" sein um alle Listen einzulesen
     ./apps.sh check datei1.applist
     ./apps.sh check "datei1.applist datei2.applist datei3.applist"
     ./apps.sh check "myDistro*.applist"
-    ./apps.sh check all
 
 Wenn Argument 1 = install gesetzt wird wird versucht die entsprechenden Pakete zu installieren.
 Es wird überprüft ob die Kommandos apt, dnf, yay, paru und flatpak existieren um fremde Paketsysteme zu ignorieren.
     ./apps.sh install datei1.applist
     ./apps.sh install "datei1.applist datei2.applist datei3.applist"
     ./apps.sh install "myDistro*.applist"
-    ./apps.sh install all
 
 Die Textdateien haben folgendes Format und Unix Zeilenschaltung:
 type=arch

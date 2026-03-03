@@ -21,18 +21,15 @@ Without arguments, the script displays a short help message and lists all *.appl
 If argument 1 = check, then argument 2 is checked.
 Argument 2 can also list multiple files but must be enclosed in quotes, ' or "
 Argument 2 can also contain GLOB specifications, also here quotes are to be used, ' or "
-Argument 2 can also be "all" to read all lists
     ./apps.sh check file1.applist
     ./apps.sh check "file1.applist file2.applist file3.applist"
     ./apps.sh check "myDistro*.applist"
-    ./apps.sh check all
 
 If argument 1 = install is set, an attempt is made to install the corresponding packages.
 It is checked if the commands apt, dnf, yay, paru, and flatpak exist to ignore foreign package systems.
     ./apps.sh install file1.applist
     ./apps.sh install "file1.applist file2.applist file3.applist"
     ./apps.sh install "myDistro*.applist"
-    ./apps.sh install all
 
 The text files have the following format and Unix line endings:
 type=arch

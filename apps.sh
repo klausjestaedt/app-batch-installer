@@ -117,10 +117,6 @@ EOF
 fi
 
 
-# Wenn Argument 2 = all dann alle Listen einlesen
-[[ $arg_applists == all ]] && arg_applists="$(cd ${applist_dir} && ls *.applist)"
-
-
 # Loop durch die Listen und Kommandos ausführen
 for list in $(echo ${applist_dir}/${arg_applists})
 do
