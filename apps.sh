@@ -117,136 +117,139 @@ fi
 
 
 # Loop durch die Listen und Kommandos ausführen
-for list in $(echo ${applist_dir}/${arg_applists})
+for app_list in $(echo ${arg_applists})
 do
-	[[ ! -f "$list" ]] && continue
+	files=("${applist_dir}"$app_list)
+	for list in "${files[@]}"
+	do
+    		if [[ -f "$list" ]]; then
+        		echo -e "\nVerarbeite Liste: ${list}"
+			# Pakettyp auslesen
+			paket_typ=$(head -1 $list | grep type=)
+			paket_typ="${paket_typ#*=}"
+			echo "Pakettyp: $paket_typ"
 
-	echo
-	echo "Bearbeite Liste: $list"
+			case "$paket_typ" in
 
-	# Pakettyp auslesen
-	paket_typ=$(head -1 "$list" | grep "type=" ${list})
-	paket_typ="${paket_typ#*=}"
-
-
-	case "$paket_typ" in
-
-	    ##################################################################################
-	    # PAKETLISTE IST RPM
-	    "rpm" | "RPM" | "dnf" | "DNF")
-		if [[ $tool_dnf == false ]]; then
-			echo "Dies ist keine RPM basierte Distribution"
-			echo -e "Ignoriere die Liste.\n"
-			continue
-		else
-			grep -v "type=" ${list} | grep -v "^#" | while read app
-			do
-				app="${app%%;*}"
-			        rpm -q $app >/dev/null 2>&1
-				if [ "$?" == "0" ]; then
-					printf "%-60s %s\n" "RPM-packet: $app" "bereits installiert"
+			    ##################################################################################
+			    # PAKETLISTE IST RPM
+			    "rpm" | "RPM" | "dnf" | "DNF")
+				if [[ $tool_dnf == false ]]; then
+					echo "Dies ist keine RPM basierte Distribution"
+					echo -e "Ignoriere die Liste.\n"
+					continue
 				else
-					if [[ $arg_command == check ]]; then
-						printf "%-60s %s\n" "RPM-Paket: $app" "nicht installiert"
-					elif [[ $arg_command == install ]]; then
-						printf "%-60s %s\n" "RPM-Paket: $app" "installiere"
-						sudo dnf install -y $app
-					fi
-				fi
-			done
-		fi
-	    ;;
-
-	    ##################################################################################
-	    # PAKETLISTE IST APT
-	    "apt" | "APT" | "deb" | "DEB" | "Debian" | "DEBIAN")
-		if [[ $tool_apt == false ]]; then
-			echo "Dies ist keine Debian basierte Distribution"
-			echo -e "Ignoriere die Liste.\n"
-			continue
-		else
-			grep -v "type=" ${list} | grep -v "^#" | while read app
-			do
-				app="${app%%;*}"
-				dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -q "ok installed"
-				if [ "$?" == "0" ]; then
-					printf "%-60s %s\n" "DEB-packet: $app" "bereits installiert"
-				else
-					if [[ $arg_command == check ]]; then
-						printf "%-60s %s\n" "DEB-Paket: $app" "nicht installiert"
-					elif [[ $arg_command == install ]]; then
-						printf "%-60s %s\n" "DEB-Paket: $app" "installiere"
-						sudo apt install -y $app
-					fi
-				fi
-			done
-		fi
-	    ;;
-
-	    ##################################################################################
-	    # PAKETLISTE IST Arch oder AUR
-	    "arch" | "Arch" | "ARCH" | "aur" | "AUR")
-		if [[ $tool_pacman == false ]]; then
-			echo  "Dies ist keine Arch Distribution"
-			echo -e "Ignoriere die Liste.\n"
-			continue
-		else
-			grep -v "type=" ${list} | grep -v "^#" | while read app
-			do
-				app="${app%%;*}"
-				typeset -i c=$($arch_tool -Qs "${app}" | grep "$app" | wc -l)
-			        if [ $c -gt 0 ]; then
-					printf "%-60s %s\n" "Arch-Paket: $app" "bereits installiert"
-				else
-					if [[ $arg_command == check ]]; then
-						printf "%-60s %s\n" "Arch-Paket: $app" "nicht installiert"
-					elif [[ $arg_command == install ]]; then
-						printf "%-60s %s\n" "Arch-Paket: $app" "installiere"
-						$arch_tool -S --aur --noconfirm $app
-						if [ "$app" == "teamviewer" ]; then
-							echo -e "\n\nteamviewerd service starten..."
-							sudo systemctl enable teamviewerd
-							sudo systemctl start teamviewerd
-							echo -e "\n\n"
+					grep -v "type=" "${list}" | grep -v "^#" | while read app
+					do
+						app="${app%%;*}"
+					        rpm -q $app >/dev/null 2>&1
+						if [ "$?" == "0" ]; then
+							printf "%-60s %s\n" "RPM-packet: $app" "bereits installiert"
+						else
+							if [[ $arg_command == check ]]; then
+								printf "%-60s %s\n" "RPM-Paket: $app" "nicht installiert"
+							elif [[ $arg_command == install ]]; then
+								printf "%-60s %s\n" "RPM-Paket: $app" "installiere"
+								sudo dnf install -y $app
+							fi
 						fi
-					fi
+					done
 				fi
-			done
-		fi
-	    ;;
+			    ;;
 
-	    ##################################################################################
-	    # PAKETLISTE IST Flatpak
-	    "flatpak" | "Flatpak" | "flat" | "Flat" | "flathub" | "Flathub")
-		if [[ $tool_flatpak == false ]]; then
-			echo  "Das Tool flatpak ist nicht installiert"
-			echo -e "Ignoriere die Liste.\n"
-			continue
-		else
-			grep -v "type=" ${list} | grep -v "^#" | while read app
-			do
-				app="${app%%;*}"
-				flatpak list --app | grep "$app" >/dev/null 2>&1
-			        if [ $? -eq 0 ]; then
-					printf "%-60s %s\n" "Flatpak: $app" "bereits installiert"
+			    ##################################################################################
+			    # PAKETLISTE IST APT
+			    "apt" | "APT" | "deb" | "DEB" | "Debian" | "DEBIAN")
+				if [[ $tool_apt == false ]]; then
+					echo "Dies ist keine Debian basierte Distribution"
+					echo -e "Ignoriere die Liste.\n"
+					continue
 				else
-					if [[ $arg_command == check ]]; then
-						printf "%-60s %s\n" "Flatpak: $app" "nicht installiert"
-					elif [[ $arg_command == install ]]; then
-						printf "%-60s %s\n" "Flappak: $app" "installiere"
-						flatpak install -y $app
-					fi
+					grep -v "type=" "${list}" | grep -v "^#" | while read app
+					do
+						app="${app%%;*}"
+						dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -q "ok installed"
+						if [ "$?" == "0" ]; then
+							printf "%-60s %s\n" "DEB-packet: $app" "bereits installiert"
+						else
+							if [[ $arg_command == check ]]; then
+								printf "%-60s %s\n" "DEB-Paket: $app" "nicht installiert"
+							elif [[ $arg_command == install ]]; then
+								printf "%-60s %s\n" "DEB-Paket: $app" "installiere"
+								sudo apt install -y $app
+							fi
+						fi
+					done
 				fi
-			done
-		fi
-	    ;;
+			    ;;
 
-	    *)
-	        echo "Unbekannter Pakettyp $paket_typ .. Abbruch..."
-		exit 1
-	        ;;
+			    ##################################################################################
+			    # PAKETLISTE IST Arch oder AUR
+			    "arch" | "Arch" | "ARCH" | "aur" | "AUR")
+				if [[ $tool_pacman == false ]]; then
+					echo  "Dies ist keine Arch Distribution"
+					echo -e "Ignoriere die Liste.\n"
+					continue
+				else
+					grep -v "type=" "${list}" | grep -v "^#" | while read app
+					do
+						app="${app%%;*}"
+						typeset -i c=$($arch_tool -Qs "${app}" | grep "$app" | wc -l)
+					        if [ $c -gt 0 ]; then
+							printf "%-60s %s\n" "Arch-Paket: $app" "bereits installiert"
+						else
+							if [[ $arg_command == check ]]; then
+								printf "%-60s %s\n" "Arch-Paket: $app" "nicht installiert"
+							elif [[ $arg_command == install ]]; then
+								printf "%-60s %s\n" "Arch-Paket: $app" "installiere"
+								$arch_tool -S --aur --noconfirm $app
+								if [ "$app" == "teamviewer" ]; then
+									echo -e "\n\nteamviewerd service starten..."
+									sudo systemctl enable teamviewerd
+									sudo systemctl start teamviewerd
+									echo -e "\n\n"
+								fi
+							fi
+						fi
+					done
+				fi
+			    ;;
 
-	esac
+			    ##################################################################################
+			    # PAKETLISTE IST Flatpak
+			    "flatpak" | "Flatpak" | "flat" | "Flat" | "flathub" | "Flathub")
+				if [[ $tool_flatpak == false ]]; then
+					echo  "Das Tool flatpak ist nicht installiert"
+					echo -e "Ignoriere die Liste.\n"
+					continue
+				else
+					grep -v "type=" "${list}" | grep -v "^#" | while read app
+					do
+						app="${app%%;*}"
+						flatpak list --app | grep "$app" >/dev/null 2>&1
+					        if [ $? -eq 0 ]; then
+							printf "%-60s %s\n" "Flatpak: $app" "bereits installiert"
+						else
+							if [[ $arg_command == check ]]; then
+								printf "%-60s %s\n" "Flatpak: $app" "nicht installiert"
+							elif [[ $arg_command == install ]]; then
+								printf "%-60s %s\n" "Flappak: $app" "installiere"
+								flatpak install -y $app
+							fi
+						fi
+					done
+				fi
+			    ;;
+
+			    *)
+			        echo "Unbekannter Pakettyp $paket_typ .. Abbruch..."
+				exit 1
+			        ;;
+
+			esac
+
+    		fi
+	done
 done
 
 exit 0
