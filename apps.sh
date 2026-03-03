@@ -93,9 +93,8 @@ if [[ $arg_count == 0 ]]; then
 
 ************************************************************************
 Usage: apps.sh [check|install] [some.applist]
-Usage: apps.sh [check|install] [some*]  #includes GLOB pattern
-Usage: apps.sh [check|install] [\"some1.applist some2.applist\"]
-Usage: apps.sh [check|install] [all]"
+Usage: apps.sh [check|install] ["some*"]  #includes GLOB pattern
+Usage: apps.sh [check|install] ["some1.applist some2.applist"]
 	
 Argument 1:
   check       check if apps in the list are already installed
