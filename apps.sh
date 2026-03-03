@@ -61,6 +61,10 @@ if [[ $? != 0 ]]; then
 	read -p ">> Please enter the complete path to this folder: " applist_dir
 	applist_dir=$(echo $applist_dir | sed 's/\/$//')
 	applist_dir="${applist_dir}/"
+	if [[ ! -d "/$applist_dir" ]]; then
+		echo -e "\n\nAttention: /$applist_dir does not exist, stopping execution..\n\n"
+		exit 1
+	fi
 	read -p "Is $applist_dir correct? (y/N)" yesno
 	[[ $yesno == y || $yesno == j ]] && echo "applist_dir=${applist_dir}" >> ~/.applists/apps.config
 fi
