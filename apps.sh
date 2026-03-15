@@ -7,9 +7,9 @@
 #                     - Install missing programs
 #                     - Install Repositories
 #        It supports:
-#                     - Debian APT packages via apt and Debian Repos
+#                     - Debian APT packages via apt and Repos
 #                     - Arch packages and AUR (Arch User Repository) via yay or paru
-#                     - RedHat RPM packages via dnf
+#                     - RedHat RPM packages via dnf and Repos
 #                     - Flatpaks via flatpak (Flathub must be configured)
 #
 # See README.md here: https://github.com/klausjestaedt/app-batch-installer
@@ -19,6 +19,7 @@
 #             Author:  Klaus Jestädt
 #            Created: 01.01.2026  Version: 1.0
 #            Updated: 15.03.2026  Version: 1.1 (Repos for Debian based distros)
+#            Updated: 15.03.2026  Version: 1.2 (Repos for RPM based distros)
 #
 #       Dependencies: Installed Linux system with package manager (apt or dnf or yay or paru and/or flatpak
 #
@@ -126,6 +127,18 @@ do
 					grep -v "type=" "${list}" | grep -v "^#" | while read app
 					do
 						app="${app%%;*}"
+
+						# Abfrage ob es sich um ein Repo handelt
+						if [[ $app == repo:* ]]; then
+							[[ $arg_command == check ]] && continue
+							if [[ $arg_command == install ]]; then
+								repo="$(echo $app | sed 's/repo://')"
+								echo "Aktiviere Repo: $repo"
+								sudo dnf config-manager --add-repo $repo
+								continue
+							fi
+						fi
+
 					        rpm -q $app >/dev/null 2>&1
 						if [ "$?" == "0" ]; then
 							printf "%-60s %s\n" "RPM-packet: $app" "bereits installiert"

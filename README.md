@@ -77,7 +77,8 @@ https://www.youtube.com/watch?v=AkwuVd4t0A8
 - Created:    01.01.2026
 - Version:    1.0
 - Updated:    15.03.2026
-- Version:    1.1 See UPDATE_v1.1.md (Support for Debian repositories)
+- Version:    1.1 Support for Debian repositories
+- Version:    1.2 Support for RPM repositories
 
 ## Dependencies
 

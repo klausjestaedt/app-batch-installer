@@ -1,0 +1,8 @@
+type=rpm
+# Fedora Linux Installationspakete
+filezilla;Komplett ausgestatteter grafischer FTP-/FTPS-/SFTP-Client
+qutebrowser;Tastaturgesteuerter, vim-ähnlicher Browser auf Basis von PyQt5
+# Und nun das Repo für VS Code
+repo:https://packages.microsoft.com/yumrepos/vscode/config.repo
+# Und jetzt das VS Code
+code
