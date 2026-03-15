@@ -17,14 +17,14 @@ the script checks if a configuration file exists at ~/.applists/apps.config. If 
 
 ## Example content for an my-debian.applist file:
 
-type=deb
-unix2dos;Line-ending converter
-#This is a comment
-nmap
-rsync;file sync tool
-#Following line is a repository for fastfetch
-repo:ppa:zhangsongcui3371/fastfetch;Repo for fastfetch
-fastfetch
+type=deb  
+unix2dos;Line-ending converter  
+#This is a comment  
+nmap  
+rsync;file sync tool  
+#Following line is a repository for fastfetch  
+repo:ppa:zhangsongcui3371/fastfetch;Repo for fastfetch  
+fastfetch  
 
 
 ### Line 1 sets the app type
