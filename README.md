@@ -38,15 +38,15 @@ Valid values:
 Each comment line starts with a heading #
 
 ### App lines
-Each line starts with an existing app name from your distro package manager or flathub.org
-Be exact on that, escpecially for flatpaks: use org.gimp.GIMP instead of gimp
+Each line starts with an existing app name from your distro package manager or flathub.org  
+Be exact on that, escpecially for flatpaks: use org.gimp.GIMP instead of gimp  
 Optional the ; separates your freestyle description for an app or repo
 
 ### One or more applist files
-You can group *.applist files by topics or distros and use file globbing
-- ./apps.sh check mydistro*.applist
-or use exact file/s
-- ./apps.sh check "desktop.applist commandline.applist"
+You can group *.applist files by topics or distros and use file globbing  
+./apps.sh check mydistro*.applist  
+or use exact file/s  
+./apps.sh check "desktop.applist commandline.applist"
 
 
 ## Usage
