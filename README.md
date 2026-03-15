@@ -2,53 +2,72 @@
 
 ## Description
 
-This Bash script is used to install apps from files containing lists of programs. It is designed to quickly provide a system with desired software. It can also check if desired programs are already installed.
+This Bash script can be used to check or install apps in batch processing from one or more applist files containing lists of programs and in some cases also repositories. It's designed to quickly provide a system with desired software. It can also check if desired programs are already installed and install the missiing ones. From v1.1 on Repositories are added for DEB and RPM packages.
 
 The following package managers and packages are supported:
-
 1. Debian DEB packages installed using apt
 2. RedHat RPM packages installed using dnf
 3. Arch and AUR (Arch User Repository) packages installed using yay or paru
 4. Flatpaks installed using flatpak (Flathub must be configured)
 
-On the first start, the script checks if a configuration file exists at ~/.applists/apps.config. If not, it asks for the path where the files with the app lists are located. Any number of files with the extension *.applist can be stored there. The location is then saved in ~/.applists/apps.config.
+On the first start
+./apps.sh
+the script checks if a configuration file exists at ~/.applists/apps.config. If not, it asks for the path where the files with the app lists are located. Any number of files with the extension *.applist can be stored there. The location is then saved in ~/.applists/apps.config
 
-The tool can then be called:
 
-Without arguments, the script displays a short help message and lists all *.applist files.
-    ./apps.sh
+## Example content for an my-debian.applist file:
 
-If argument 1 = check, then argument 2 is checked.
-Argument 2 can also list multiple files but must be enclosed in quotes, ' or "
-Argument 2 can also contain GLOB specifications, also here quotes are to be used, ' or "
-    ./apps.sh check file1.applist
-    ./apps.sh check "file1.applist file2.applist file3.applist"
-    ./apps.sh check "myDistro*.applist"
+type=deb
+unix2dos;Line-ending converter
+#This is a comment
+nmap
+rsync;file sync tool
+#Following line is a repository for fastfetch
+repo:ppa:zhangsongcui3371/fastfetch;Repo for fastfetch
+fastfetch
 
-If argument 1 = install is set, an attempt is made to install the corresponding packages.
-It is checked if the commands apt, dnf, yay, paru, and flatpak exist to ignore foreign package systems.
-    ./apps.sh install file1.applist
-    ./apps.sh install "file1.applist file2.applist file3.applist"
-    ./apps.sh install "myDistro*.applist"
 
-The text files have the following format and Unix line endings:
-type=arch
-packagename1;Package description1
-#packagename2;Package description2
-packagename3;Package description3
-packagename4;Package description4
+### Line 1 sets the app type
+Valid values:
+1. Debian based distros: apt, APT, deb, DEB, Debian, DEBIAN
+2. RPM based distros: rpm, RPM, dnf, DNF
+3. Arch based distros: type=arch, Arch, ARCH, aur, AUR
+4. Flatpaks: type=flatpak, Flatpak, flat, Flat, flathub, Flathub
 
-The package type header in line 1 can contain the following values:
-For Arch:       type=arch or ARCH or aur or AUR
-For DEB:        type=apt or APT or deb or DEB or Debian or DEBIAN
-For RPM:        type=rpm or RPM or dnf or DNF
-For Flatpaks:   type=flatpak or Flatpak or flat or Flat or flathub or Flathub
+### Comment Lines
+Each comment line starts with a heading #
 
-The program description is optional and purely informative; it is currently not used by the tool.
+### App lines
+Each line starts with an existing app name from your distro package manager or flathub.org
+Be exact on that, escpecially for flatpaks: use org.gimp.GIMP instead of gimp
+Optional the ; separates your freestyle description for an app or repo
 
-It is recommended to first run a check, then the install, and then another check if a package was not installed to identify where there might have been problems in a longer installation.
+### One or more applist files
+You can group *.applist files by topics or distros and use file globbing
+- ./apps.sh check mydistro*.applist
+or use exact file/s
+- ./apps.sh check "desktop.applist commandline.applist"
 
-## Video for the script
+
+## Usage
+Display a help message and list all *.applist files or ask for the storage location of your *.applist files.
+1. ./apps.sh
+
+Start the script with check argument, Repos are ignored here:
+1. ./apps.sh check file1.applist
+2. ./apps.sh check "file1.applist file2.applist file3.applist"
+3. ./apps.sh check "myDistro*.applist"
+
+Start the script with install argument:
+1. ./apps.sh install file1.applist
+2. ./apps.sh install "file1.applist file2.applist file3.applist"
+3. ./apps.sh install "myDistro*.applist"
+
+
+I recommend to check first, then install whatever needed and then check again if all apps habve been installed.
+
+
+## Video for the script v1.0
 
 <https://www.youtube.com/ follows a.s.a.p.>
 

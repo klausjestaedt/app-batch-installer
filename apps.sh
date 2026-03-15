@@ -1,50 +1,29 @@
 #/usr/bin/env bash
-# -----------------------------------------------------------------------------
-# Script:       apps.sh
+# ---------------------------------------------------------------------------------------------------------
+#             Script: apps.sh
 #
-# Beschreibung: Dieses Tool kann Apps aus Listen in Textdateien:
-# 			-prüfen ob alle installiert sind
-# 			-fehlende Programme installieren
-# 		Es berücksichtigt:
-# 			- Debian APT Pakete mittels apt
-# 			- Arch Pakete und AUR (Arch User Repository) mittels yay oder paru
-# 			- RedHat RPM Pakete mittels dnf
-# 			- Flatpaks mittels flatpak (Flathub muss eingerichtet sein)
+#        Description: This tool can process apps and repositories from lists in text files to:
+#                     - Check if all are installed
+#                     - Install missing programs
+#                     - Install Repositories
+#        It supports:
+#                     - Debian APT packages via apt and Debian Repos
+#                     - Arch packages and AUR (Arch User Repository) via yay or paru
+#                     - RedHat RPM packages via dnf
+#                     - Flatpaks via flatpak (Flathub must be configured)
 #
-# Description:  This tool can process apps from lists in text files to:
-# 			- Check if all are installed
-# 			- Install missing programs
-# 		It supports:
-# 			- Debian APT packages via apt
-# 			- Arch packages and AUR (Arch User Repository) via yay or paru
-# 			- RedHat RPM packages via dnf
-# 			- Flatpaks via flatpak (Flathub must be configured)
+# See README.md here: https://github.com/klausjestaedt/app-batch-installer
 #
-# Update v1.1	Hinzugefügt für Debian basierte Applisten: Repo-Zeilen, siehe Beispieldatei für PopOS
-# Update v1.1	Added for Debian based applists: Repo-lines, see sample file for PopOS
+#  Script v1.0 video: https://www.youtube.com/ follows a.s.a.p.
 #
-# Zweck:	Wer häufig Systeme installiert sammelt Apps
-# 		die er auf jedem System installieren will.
-# Purpose: 	Those who frequently install systems collect apps
-# 		that they want to have installed on every system.
+#             Author:  Klaus Jestädt
+#            Created: 01.01.2026  Version: 1.0
+#            Updated: 15.03.2026  Version: 1.1 (Repos for Debian based distros)
 #
-# Beispiele:	Starte einfach ./apps.sh und folge den Hinweisen
-# Examples:	Just start ./apps.sh and follow the hints
+#       Dependencies: Installed Linux system with package manager (apt or dnf or yay or paru and/or flatpak
 #
-#
-# Video zum Script:
-# Script video:		https://www.youtube.com/ follows a.s.a.p.
-#
-# Author:	Klaus Jestädt
-# Created:	01.01.2026
-# Updated:	15.03.2026
-# Version:      1.1
-#
-# Abhängigkeiten: Installiertes Linux System mit den konfigurierten
-#                 Paketmanagern: (apt || dnf || yay || paru) && flatpak
-#
-# License: MIT
-# -----------------------------------------------------------------------------
+#            License: MIT
+# ---------------------------------------------------------------------------------------------------------
 
 arg_count="$#"
 arg_command="$1"
@@ -104,7 +83,7 @@ Argument 1:
   check       check if apps in the list are already installed
   install     install missing apps from a list
 Argument 2:
-  listname    one list or more "list1 list2" include globbing
+  listname/s  one list or more "list1 list2" include globbing
 ************************************************************************
 
 EOF
