@@ -1,7 +1,5 @@
 type=arch
-#
 # This is a list of my desktop apps for a CachyOS system
-#
 afpfs-ng;Arch Support für AFP
 brave-bin;Brave Browser
 calibre;E-Book-Management und -Konvertierung

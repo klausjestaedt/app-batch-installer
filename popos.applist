@@ -1,8 +1,6 @@
 type=apt
 # This is a sample list for Debian based systems
 dos2unix;line ending converter
-repo:ppa:zhangsongcui3371/fastfetch;Repo for fastfetch
-fastfetch
 htop
 net-tools
 nextcloud-desktop
@@ -13,3 +11,5 @@ rsync
 unzip
 vim
 zip
+repo:ppa:zhangsongcui3371/fastfetch;Repo for fastfetch
+fastfetch
