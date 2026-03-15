@@ -69,7 +69,7 @@ I recommend to check first, then install whatever needed and then check again if
 
 ## Video for the script v1.0
 
-<https://www.youtube.com/ follows a.s.a.p.>
+https://www.youtube.com/watch?v=AkwuVd4t0A8
 
 ## Author
 

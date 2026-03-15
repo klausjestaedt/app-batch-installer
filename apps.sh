@@ -14,7 +14,7 @@
 #
 # See README.md here: https://github.com/klausjestaedt/app-batch-installer
 #
-#  Script v1.0 video: https://www.youtube.com/ follows a.s.a.p.
+#  Script v1.0 video: https://www.youtube.com/watch?v=AkwuVd4t0A8
 #
 #             Author:  Klaus Jestädt
 #            Created: 01.01.2026  Version: 1.0
@@ -84,6 +84,8 @@ Argument 1:
   install     install missing apps from a list
 Argument 2:
   listname/s  one list or more "list1 list2" include globbing
+
+See Video: https://www.youtube.com/watch?v=AkwuVd4t0A8
 ************************************************************************
 
 EOF
