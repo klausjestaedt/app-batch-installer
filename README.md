@@ -50,18 +50,18 @@ or use exact file/s
 
 
 ## Usage
-Display a help message and list all *.applist files or ask for the storage location of your *.applist files.
-1. ./apps.sh
+Display a help message and list all *.applist files or ask for the storage location of your *.applist files.  
+./apps.sh
 
-Start the script with check argument, Repos are ignored here:
-1. ./apps.sh check file1.applist
-2. ./apps.sh check "file1.applist file2.applist file3.applist"
-3. ./apps.sh check "myDistro*.applist"
+Start the script with check argument, Repos are ignored here:  
+./apps.sh check file1.applist  
+./apps.sh check "file1.applist file2.applist file3.applist"  
+./apps.sh check "myDistro*.applist"
 
-Start the script with install argument:
-1. ./apps.sh install file1.applist
-2. ./apps.sh install "file1.applist file2.applist file3.applist"
-3. ./apps.sh install "myDistro*.applist"
+Start the script with install argument:  
+./apps.sh install file1.applist  
+./apps.sh install "file1.applist file2.applist file3.applist"  
+./apps.sh install "myDistro*.applist"  
 
 
 I recommend to check first, then install whatever needed and then check again if all apps habve been installed.
