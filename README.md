@@ -54,11 +54,11 @@ It is recommended to first run a check, then the install, and then another check
 
 ## Author
 
-Author:     Klaus Jestädt
-Created:    01.01.2026
-Version:    1.0
-Updated:    15.03.2026
-Version:    1.1 See UPDATE_v1.1.md (Support for Debian repositories)
+- Author:     Klaus Jestädt
+- Created:    01.01.2026
+- Version:    1.0
+- Updated:    15.03.2026
+- Version:    1.1 See UPDATE_v1.1.md (Support for Debian repositories)
 
 ## Dependencies
 

@@ -54,11 +54,11 @@ Es empfiehlt sich erst ein check, dann der install und dann nochmal einen check 
 
 ## Autor
 
-Autor:      Klaus Jestädt
-Erstellt:   01.01.2026
-Version:    1.0
-Update:     15.03.2026
-Version:    1.1 Siehe UPDATE_v1.1.md (Support für Debian Repositories)
+- Autor:      Klaus Jestädt
+- Erstellt:   01.01.2026
+- Version:    1.0
+- Update:     15.03.2026
+- Version:    1.1 Siehe UPDATE_v1.1.md (Support für Debian Repositories)
 
 ## Abhängigkeiten
 
