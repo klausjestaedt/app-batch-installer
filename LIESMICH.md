@@ -55,7 +55,7 @@ Es empfiehlt sich erst ein check, dann der install und dann nochmal einen check 
 ## Autor
 
 Autor: Klaus Jestädt
-Erstellt am: 01. Januar 2026
+Erstellt am: 01.01.2026
 Version: 1.0
 
 ## Abhängigkeiten

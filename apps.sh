@@ -20,6 +20,9 @@
 # 			- RedHat RPM packages via dnf
 # 			- Flatpaks via flatpak (Flathub must be configured)
 #
+# Update v1.1	Hinzugefügt für Debian basierte Applisten: Repo-Zeilen, siehe Beispieldatei für PopOS
+# Update v1.1	Added for Debian based applists: Repo-lines, see sample file for PopOS
+#
 # Zweck:	Wer häufig Systeme installiert sammelt Apps
 # 		die er auf jedem System installieren will.
 # Purpose: 	Those who frequently install systems collect apps
@@ -33,8 +36,9 @@
 # Script video:		https://www.youtube.com/ follows a.s.a.p.
 #
 # Author:	Klaus Jestädt
-# Created:	01. Januar 2026
-# Version:      1.0
+# Created:	01.01.2026
+# Updated:	15.03.2026
+# Version:      1.1
 #
 # Abhängigkeiten: Installiertes Linux System mit den konfigurierten
 #                 Paketmanagern: (apt || dnf || yay || paru) && flatpak
@@ -101,7 +105,6 @@ Argument 1:
   install     install missing apps from a list
 Argument 2:
   listname    one list or more "list1 list2" include globbing
-  all         use all existing lists
 ************************************************************************
 
 EOF
@@ -168,6 +171,18 @@ do
 					grep -v "type=" "${list}" | grep -v "^#" | while read app
 					do
 						app="${app%%;*}"
+
+						# Abfrage ob es sich um ein Repo handelt
+						if [[ $app == repo:* ]]; then
+							[[ $arg_command == check ]] && continue
+							if [[ $arg_command == install ]]; then
+								repo="$(echo $app | sed 's/repo://')"
+								echo "Aktiviere Repo: $repo"
+								sudo add-apt-repository $repo && sudo apt update
+								continue
+							fi
+						fi
+
 						dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -q "ok installed"
 						if [ "$?" == "0" ]; then
 							printf "%-60s %s\n" "DEB-packet: $app" "bereits installiert"

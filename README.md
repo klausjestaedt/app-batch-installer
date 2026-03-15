@@ -55,7 +55,7 @@ It is recommended to first run a check, then the install, and then another check
 ## Author
 
 Author: Klaus Jestädt
-Created on: January 01, 2026
+Created: 01.01.2026
 Version: 1.0
 
 ## Dependencies
